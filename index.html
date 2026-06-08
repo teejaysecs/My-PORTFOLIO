@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akinola Tijesunimi Adams | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #050508;
+            --panel-color: #0c0d14;
+            --panel-border: rgba(255, 255, 255, 0.05);
+            --accent-glow: #CCFF00;
+            --accent-muted: #8a9b3e;
+            --text-main: #ffffff;
+            --text-muted: #8e93a6;
+            --card-hover: #121420;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 80% 20%, rgba(204, 255, 0, 0.03) 0%, transparent 50%),
+                              radial-gradient(circle at 20% 70%, rgba(0, 132, 255, 0.02) 0%, transparent 50%);
+        }
+
+        /* Scrollbar Optimization */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-glow);
+        }
+
+        /* Layout Structure */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        header {
+            padding: 30px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+            background: rgba(5, 5, 8, 0.7);
+            border-bottom: 1px solid var(--panel-border);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        .logo span {
+            color: var(--accent-glow);
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            margin-left: 32px;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent-glow);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .meta-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(204, 255, 0, 0.05);
+            border: 1px solid rgba(204, 255, 0, 0.15);
+            padding: 6px 14px;
+            border-radius: 30px;
+            color: var(--accent-glow);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(36px, 6vw, 56px);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+            margin-bottom: 24px;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 32px;
+            max-width: 540px;
+        }
+
+        /* Quick Info Cards */
+        .info-pill-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .info-pill {
+            background: var(--panel-color);
+            border: 1px solid var(--panel-border);
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-size: 13px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-pill i {
+            color: var(--accent-glow);
+        }
+
+        /* Skills Matrix Grid */
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--panel-border);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 100px;
+        }
+
+        .skill-card {
+            background: var(--panel-color);
+            border: 1px solid var(--panel-border);
+            padding: 24px;
+            border-radius: 16px;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(204, 255, 0, 0.3);
+            background: var(--card-hover);
+        }
+
+        .skill-card i {
+            font-size: 24px;
+            color: var(--accent-glow);
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .skill-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .skill-card span {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Projects & Startups Architecture */
+        .project-section {
+            padding: 60px 0 100px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            margin-bottom: 40px;
+        }
+
+        .main-project-card {
+            background: linear-gradient(135deg, #0e1017 0%, #07080d 100%);
+            border: 1px solid var(--panel-border);
+            border-radius: 24px;
+            padding: 32px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            align-items: center;
+            transition: border-color 0.3s ease;
+        }
+
+        .main-project-card:hover {
+            border-color: rgba(204, 255, 0, 0.2);
+        }
+
+        .project-visual {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            height: 220px;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-muted);
+            gap: 12px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .project-visual i {
+            font-size: 40px;
+            color: var(--accent-glow);
+        }
+
+        .project-details h4 {
+            font-family: 'Syne', sans-serif;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .project-details p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .metrics-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .metric-tag {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 11px;
+            color: var(--text-main);
+            border: 1px solid var(--panel-border);
+        }
+
+        .btn-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent-glow);
+            color: #000;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-link:hover {
+            transform: scale(1.02);
+        }
+
+        .btn-link.secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            border: 1px solid var(--panel-border);
+        }
+        
+        .btn-link.secondary:hover {
+            border-color: var(--accent-glow);
+        }
+
+        /* Startup Ecosystem Subgrid */
+        .startup-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .startup-card {
+            background: var(--panel-color);
+            border: 1px solid var(--panel-border);
+            padding: 24px;
+            border-radius: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .startup-info h5 {
+            font-family: 'Syne', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .startup-info span {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .status-badge {
+            background: rgba(255, 204, 0, 0.05);
+            border: 1px solid rgba(255, 204, 0, 0.2);
+            color: #FFCC00;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 60px 0 140px;
+        }
+
+        .contact-box {
+            background: var(--panel-color);
+            border: 1px solid var(--panel-border);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .contact-box h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .contact-box p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 32px;
+        }
+
+        .channels-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .channel-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--panel-border);
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 14px 24px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .channel-btn:hover {
+            border-color: var(--accent-glow);
+            background: rgba(204, 255, 0, 0.02);
+            color: var(--accent-glow);
+        }
+
+        /* Footer System */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--panel-border);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        /* Scroll Reveal Utility Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero p {
+                margin: 0 auto 32px;
+            }
+            .info-pill-box, .channels-wrapper {
+                justify-content: center;
+            }
+            .main-project-card {
+                grid-template-columns: 1fr;
+            }
+            .startup-grid {
+                grid-template-columns: 1fr;
+            }
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-wrapper">
+            <div class="logo">AKINOLA-<span>TIJESUNIMI</span></div>
+            <div class="logo">PORTFOLIO<span></span></div>
+            <nav>
+                <a href="#about" class="active">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Ecosystem</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="about" class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="reveal">
+                    <span class="meta-tag"> My Portfolio Node 2026</span>
+                    <h1>Akinola Tijesunimi Adams</h1>
+                
+                    
+                    <div class="info-pill-box">
+                        <div class="info-pill">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            <span>Babcock University Student</span>
+                        </div>
+                        <div class="info-pill">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <span>Ibadan, Oyo State</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="container reveal">
+        <h2 class="section-title">Specialized Disciplines</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h3>CyberSecurity Specialist</h3>
+                <span>Junior Tier</span>
+            </div>
+            <div class="skill-card">
+                <i class="fa-solid fa-compass-drafting"></i>
+                <h3>UI & UX Designer</h3>
+                <span>Junior Tier</span>
+            </div>
+            <div class="skill-card">
+                <i class="fa-solid fa-code"></i>
+                <h3>C Programming</h3>
+                <span>Core Developer</span>
+            </div>
+            <div class="skill-card">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <h3>AI Prompter</h3>
+                <span>Specialized Tier</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="project-section bento-bg">
+        <div class="container reveal">
+            <h2 class="section-title">Project Deployments & Startups</h2>
+            
+            <div class="projects-grid">
+                <div class="main-project-card">
+                    <div class="project-visual">
+                        <i class="fa-solid fa-cat"></i>
+                        <span>Dietcat Engine Active</span>
+                    </div>
+                    <div class="project-details">
+                        <span style="color: var(--accent-glow); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 6px;">Live Web Application</span>
+                        <h4>DietCat</h4>
+                        <p>
+                            An intelligent sorting tool that categorizes age profiles to generate personalized, targeted nutrition structures. Gathers basic user parameters like Name, Age, Height, and Weight to process balanced, real-time macro allocations.
+                        </p>
+                        <div class="metrics-grid">
+                            <div class="metric-tag">Data Collection Engine</div>
+                            <div class="metric-tag">AI Schedules</div>
+                        </div>
+                        <a href="https://dietcat.onrender.com/" target="_blank" class="btn-link">
+                            Launch App <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="main-project-card">
+                    <div class="project-visual">
+                        <i class="fa-solid fa-database"></i>
+                        <span>System Compiling / Active Dev</span>
+                    </div>
+                    <div class="project-details">
+                        <span style="color: var(--accent-glow); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 6px;">Administration Engine</span>
+                        <h4>MONDO DATABASE</h4>
+                        <p>
+                            A custom database compiler and administration software setup. Allows administrators to seamlessly generate secure tables, structure row layouts for raw dataset entries, and automatically map indexed key signatures to each entry.
+                        </p>
+                        <div class="metrics-grid">
+                            <div class="metric-tag">Database Compiler</div>
+                            <div class="metric-tag">Serial Key Indexing</div>
+                            <div class="metric-tag">Row Mapping</div>
+                        </div>
+                        <a href="#projects" class="btn-link secondary" onclick="alert('Mondo Database compilation log is local. Interface staging link coming soon.'); return false;">
+                            In Progress <i class="fa-solid fa-gears"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="startup-grid">
+                <div class="startup-card">
+                    <div class="startup-info">
+                        <h5>VUEE</h5>
+                        <span>Subcultural Clothing Infrastructure</span>
+                    </div>
+                    <div class="status-badge">COMING SOON!!</div>
+                </div>
+                <div class="startup-card">
+                    <div class="startup-info">
+                        <h5>VELTO SECURITIES</h5>
+                        <span>Protective Tech & Teaching Network</span>
+                    </div>
+                    <div class="status-badge">COMING SOON!!</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container reveal">
+            <div class="contact-box">
+                <h3>Establish Connection</h3>
+                <p>Reach out directly to me on here!!</p>
+                <div class="channels-wrapper">
+                    <a href="https://wa.me/2348057396918" target="_blank" class="channel-btn">
+                        <i class="fa-brands fa-whatsapp" style="color: #25D366;"></i> WhatsApp
+                    </a>
+                    <a href="https://github.com/teejaysecs" target="_blank" class="channel-btn">
+                        <i class="fa-brands fa-github"></i> GitHub Profile
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Akinola Tijesunimi Adams</p>
+        </div>
+    </footer>
+
+    <script>
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach((element) => {
+            observer.observe(element);
+            element.classList.add('reveal');
+        });
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section, div.reveal');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 200) {
+                    const id = section.getAttribute('id');
+                    if(id) current = id;
+                }
+            });
+
+            navLinks.forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href').includes(current) && current !== '') {
+                    a.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
